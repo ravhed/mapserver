@@ -2210,12 +2210,6 @@ void msOWSPrintBoundingBox(FILE *stream, const char *tabspace,
         if (msProjectionsDiffer(srcproj, &proj) == MS_TRUE) {
           msProjectRect(srcproj, &proj, &ext);
         }
-        /*for wms 1.3.0 we need to make sure that we present the BBOX with
-          a reversed axes for some espg codes*/
-        if (wms_version >= OWS_1_3_0 && value && strncasecmp(value, "EPSG:", 5) == 0) {
-          msAxisNormalizePoints( &proj, 1, &(ext.minx), &(ext.miny) );
-          msAxisNormalizePoints( &proj, 1, &(ext.maxx), &(ext.maxy) );
-        }
       }
       msFreeProjection( &proj );
 
